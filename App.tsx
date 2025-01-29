@@ -1,17 +1,19 @@
-import React from 'react';
-import { View, StatusBar } from 'react-native';
-import styles from './styles';
-import Box from './Box';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './Home';
+import Settings from './Settings';
+import { RootStackParamList } from './router';
 
-const boxes = new Array(10).fill(null).map((v, i) => i + 1);
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar hidden={false} />
-      {boxes.map((i) => (
-        <Box key={i}>#{i}</Box>
-      ))}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Settings' component={Settings} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
